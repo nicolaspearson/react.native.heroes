@@ -5,6 +5,7 @@
 		"prefer-array-literal": [true, { "allow-type-parameters": true }],
 		"indent": [true, "tabs"],
 		"ter-indent": [true, "tab"],
+		"trailing-comma": false,
 		"variable-name": [
 			true,
 			"ban-keywords",
