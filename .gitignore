@@ -10,3 +10,6 @@ logs/*.log
 
 # OS files
 .DS_Store
+
+# Expo files
+.expo
