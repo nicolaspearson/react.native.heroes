@@ -1,12 +1,19 @@
 {
+	"name": "react.native.heroes",
+	"description": "A React Native app that displays hero information.",
 	"main": "node_modules/expo/AppEntry.js",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/nicolaspearson/react.native.heroes.git"
+	},
 	"scripts": {
 		"start": "expo start",
 		"android": "expo start --android",
 		"ios": "expo start --ios",
 		"eject": "expo eject",
 		"test": "npm run tslint && npm run tsc-test && npm run jest",
-		"tslint": "tslint --project .",
+		"tslint": "tslint -p tsconfig.json src/**/*.{ts,tsx}",
 		"tsc-test": "tsc --project . --noEmit",
 		"jest": "jest"
 	},
@@ -23,13 +30,14 @@
 		"@types/react-test-renderer": "~16.8.1",
 		"jest": "~24.5.0",
 		"jest-expo": "~32.0.0",
+		"react-native-dotenv": "~0.2.0",
 		"react-test-renderer": "~16.8.4",
 		"ts-jest": "~24.0.0",
 		"tslint": "~5.14.0",
 		"tslint-config-airbnb": "~5.11.1",
+		"tslint-react": "~3.6.0",
 		"typescript": "~3.3.3333"
 	},
-	"private": true,
 	"jest": {
 		"preset": "jest-expo",
 		"transform": {
