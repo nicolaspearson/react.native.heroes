@@ -1,0 +1,16 @@
+{
+	"extends": ["tslint:recommended", "tslint-config-airbnb"],
+	"rules": {
+		"no-any": true,
+		"prefer-array-literal": [true, { "allow-type-parameters": true }],
+		"indent": [true, "tabs"],
+		"ter-indent": [true, "tab"],
+		"variable-name": [
+			true,
+			"ban-keywords",
+			"check-format",
+			"allow-pascal-case",
+			"allow-leading-underscore"
+		]
+	}
+}
