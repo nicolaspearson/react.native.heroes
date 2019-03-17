@@ -6,11 +6,20 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import Home from './screens/Home';
 
-const AppNavigator = createStackNavigator({
-	Home: { screen: Home }
-});
+const AppNavigator = createStackNavigator(
+	{
+		Home: { screen: Home }
+	},
+	{
+		initialRouteName: 'Home'
+	}
+);
 
 const AppContainer = createAppContainer(AppNavigator);
+
+export interface AppProps {
+	// Empty
+}
 
 interface State {
 	currentTheme?: Partial<Theme>;
@@ -18,7 +27,7 @@ interface State {
 	theme?: Partial<Theme>;
 }
 
-class App extends React.Component<{}, State> {
+class App extends React.Component<AppProps, State> {
 	public state: State = {
 		currentTheme: undefined,
 		isReady: false,

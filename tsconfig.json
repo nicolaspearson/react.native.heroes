@@ -1,16 +1,35 @@
 {
 	"compilerOptions": {
-		"target": "es2017",
-		"lib": ["es2017", "esnext.asynciterable"],
+		"outDir": "build",
+		"module": "esnext",
 		"moduleResolution": "node",
-		"jsx": "react-native",
-		"strict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"types": ["jest"],
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"jsx": "preserve",
 		"baseUrl": ".",
+		"sourceMap": true,
+		"allowJs": false,
+		"esModuleInterop": true,
+		"strict": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"forceConsistentCasingInFileNames": true,
+		"experimentalDecorators": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"noUnusedLocals": true,
+		"allowSyntheticDefaultImports": true,
+		"removeComments": true,
+		"skipLibCheck": true,
+		"types": ["jest"],
 		"paths": {
 			"expo": ["node_modules/@types/expo", "node_modules/expo"]
 		}
-	}
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "build"]
 }
