@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { Hero } from '../../models/Hero';
 import { HeroStore } from '../../store/HeroStore';
 
 const styles = StyleSheet.create({
@@ -23,12 +24,20 @@ export interface HomeProps {
 }
 
 interface State {
-	// Empty
+	heroes: Hero[];
 }
 
 @inject('heroStore')
 @observer
 class Home extends React.Component<HomeProps, State> {
+	public async componentDidMount() {
+		if (this.props.heroStore) {
+			await this.props.heroStore.getHeroes();
+			console.log(this.props.heroStore.dataList);
+			this.setState({ heroes: this.props.heroStore.dataList });
+		}
+	}
+
 	public render() {
 		return (
 			<View style={styles.container}>
