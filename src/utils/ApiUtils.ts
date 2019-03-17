@@ -20,7 +20,6 @@ export default class ApiUtils {
 	): Promise<Response> {
 		let resStatus: number = 0;
 		const reqUrl: string = url + path;
-		console.log(reqUrl);
 		return fetch(reqUrl, {
 			cache: 'default',
 			method,

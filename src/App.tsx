@@ -13,15 +13,20 @@ const AppNavigator = createStackNavigator(
 		Home: { screen: Home }
 	},
 	{
-		initialRouteName: 'Home'
+		initialRouteName: 'Home',
+		defaultNavigationOptions: {
+			headerStyle: {
+				backgroundColor: '#1F90E6'
+			},
+			headerTintColor: '#FFF',
+			headerTitleStyle: {
+				fontWeight: 'normal'
+			}
+		}
 	}
 );
 
 const AppContainer = createAppContainer(AppNavigator);
-
-export interface AppProps {
-	// Empty
-}
 
 interface State {
 	currentTheme?: Partial<Theme>;
@@ -33,7 +38,7 @@ interface State {
 configure({ enforceActions: 'observed' });
 
 @observer
-class App extends React.Component<AppProps, State> {
+class App extends React.Component<{}, State> {
 	public state: State = {
 		currentTheme: undefined,
 		isReady: false,
