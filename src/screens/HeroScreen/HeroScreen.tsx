@@ -1,4 +1,4 @@
-import { Button, InputItem, List, Toast } from '@ant-design/react-native';
+import { Button, InputItem, List } from '@ant-design/react-native';
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -64,31 +64,24 @@ class HeroScreen extends React.Component<HeroScreenProps, State> {
 
 	private createHero = async (hero: Hero) => {
 		if (this.props.heroStore && this.validateHero(hero)) {
-			Toast.info('Creating Hero', 1, undefined, false);
 			await this.props.heroStore.createHero(hero);
 			this.setState({ hero: this.props.heroStore.data });
-		} else {
-			Toast.info('Invalid Hero', 1, undefined, false);
+			this.props.navigation.goBack();
 		}
 	};
 
 	private updateHero = async (hero: Hero) => {
 		if (this.props.heroStore && this.validateHero(hero) && hero.id) {
-			Toast.info('Updating Hero', 1, undefined, false);
 			await this.props.heroStore.updateHero(hero.id, hero);
 			this.setState({ hero: this.props.heroStore.data });
-		} else {
-			Toast.info('Invalid Hero', 1, undefined, false);
+			this.props.navigation.goBack();
 		}
 	};
 
 	private deleteHero = async (hero: Hero) => {
 		if (this.props.heroStore && hero.id) {
-			Toast.info('Deleting Hero', 1, undefined, false);
 			await this.props.heroStore.deleteHero(hero.id);
 			this.props.navigation.goBack();
-		} else {
-			Toast.info('Invalid Hero', 1, undefined, false);
 		}
 	};
 

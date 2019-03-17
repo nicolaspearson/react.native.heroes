@@ -14,11 +14,14 @@ export class HeroStore extends BaseStore<Hero> {
 
 	private mutateList = (res: Hero) => {
 		if (res) {
-			const index = this.dataList.findIndex(item => res.id === item.id);
+			const index = this.dataList.findIndex(
+				item =>
+					(res.name !== undefined && res.name === item.name) ||
+					(res.id !== undefined && res.id === item.id)
+			);
 			if (index > -1) {
 				this.dataList.splice(index, 1, {
-					...res,
-					...this.dataList
+					...res
 				});
 			} else {
 				this.dataList = [...this.dataList, res];
@@ -28,7 +31,7 @@ export class HeroStore extends BaseStore<Hero> {
 
 	private deleteFromList = (res: Hero) => {
 		if (res) {
-			const index = this.dataList.findIndex(item => res.id === item.id);
+			const index = this.dataList.findIndex(item => res.name === item.name);
 			if (index > -1) {
 				this.dataList.splice(index, 1);
 			}

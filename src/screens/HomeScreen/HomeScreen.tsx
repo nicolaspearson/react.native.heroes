@@ -61,13 +61,9 @@ export interface HomeScreenProps {
 	navigation: NavigationScreenProp<NavigationState>;
 }
 
-interface State {
-	heroes: Hero[];
-}
-
 @inject('heroStore')
 @observer
-class HomeScreen extends React.Component<HomeScreenProps, State> {
+class HomeScreen extends React.Component<HomeScreenProps> {
 	public static navigationOptions = ({
 		navigation
 	}: {
@@ -81,10 +77,6 @@ class HomeScreen extends React.Component<HomeScreenProps, State> {
 				</Text>
 			)
 		};
-	};
-
-	public state: State = {
-		heroes: []
 	};
 
 	public async componentDidMount() {
@@ -107,12 +99,14 @@ class HomeScreen extends React.Component<HomeScreenProps, State> {
 
 	private renderHeroItems = (): JSX.Element[] => {
 		const items: JSX.Element[] = [];
-		for (const hero of this.state.heroes) {
-			items.push(
-				<Item key={hero.id} arrow="horizontal" onPress={() => this.handleHeroPress(hero)}>
-					{hero.name}
-				</Item>
-			);
+		if (this.props.heroStore && this.props.heroStore.dataList) {
+			for (const hero of this.props.heroStore.dataList) {
+				items.push(
+					<Item key={hero.id} arrow="horizontal" onPress={() => this.handleHeroPress(hero)}>
+						{hero.name}
+					</Item>
+				);
+			}
 		}
 		return items;
 	};
@@ -131,11 +125,14 @@ class HomeScreen extends React.Component<HomeScreenProps, State> {
 	};
 
 	public render() {
-		const hasHeroes: boolean = this.state.heroes.length > 0;
+		const hasHeroes: boolean =
+			this.props.heroStore &&
+			this.props.heroStore.dataList &&
+			this.props.heroStore.dataList.length > 0
+				? true
+				: false;
 		const loading: boolean = this.props.heroStore && this.props.heroStore.loading ? true : false;
-		if (!loading && this.props.heroStore) {
-			this.setState({ heroes: this.props.heroStore.dataList });
-		}
+
 		if (hasHeroes) {
 			return this.renderHeroList();
 		} else if (!loading) {
