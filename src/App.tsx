@@ -1,21 +1,61 @@
+import { Provider } from '@ant-design/react-native';
+import { Theme } from '@ant-design/react-native/lib/style';
+import { AppLoading, Font } from 'expo';
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
 
-export default class App extends React.Component {
+import Home from './screens/Home';
+
+const AppNavigator = createStackNavigator({
+	Home: { screen: Home }
+});
+
+const AppContainer = createAppContainer(AppNavigator);
+
+interface State {
+	currentTheme?: Partial<Theme>;
+	isReady: boolean;
+	theme?: Partial<Theme>;
+}
+
+class App extends React.Component<{}, State> {
+	public state: State = {
+		currentTheme: undefined,
+		isReady: false,
+		theme: undefined
+	};
+
+	private changeTheme = (theme?: Partial<Theme>, currentTheme?: Partial<Theme>) => {
+		this.setState({ theme, currentTheme });
+	};
+
+	public async componentDidMount() {
+		await Font.loadAsync(
+			'antoutline',
+			// tslint:disable-next-line
+			require('@ant-design/icons-react-native/fonts/antoutline.ttf')
+		);
+
+		await Font.loadAsync(
+			'antfill',
+			// tslint:disable-next-line
+			require('@ant-design/icons-react-native/fonts/antfill.ttf')
+		);
+		this.setState({ isReady: true });
+	}
+
 	public render() {
+		const { theme, currentTheme, isReady } = this.state;
+		if (!isReady) {
+			return <AppLoading />;
+		}
+
 		return (
-			<View style={styles.container}>
-				<Text>Open up App.js to start working on your app!</Text>
-			</View>
+			<Provider theme={theme}>
+				<AppContainer screenProps={{ changeTheme: this.changeTheme, currentTheme }} />
+			</Provider>
 		);
 	}
 }
 
-const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-		backgroundColor: '#fff',
-		flex: 1,
-		justifyContent: 'center'
-	}
-});
+export default App;

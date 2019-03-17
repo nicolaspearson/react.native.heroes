@@ -18,9 +18,11 @@
 		"jest": "jest"
 	},
 	"dependencies": {
+		"@ant-design/react-native": "^3.1.4",
 		"expo": "~32.0.6",
 		"react": "16.5.0",
-		"react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz"
+		"react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+		"react-navigation": "~3.4.1"
 	},
 	"devDependencies": {
 		"@types/expo": "~32.0.8",
@@ -34,7 +36,7 @@
 		"react-test-renderer": "~16.8.4",
 		"ts-jest": "~24.0.0",
 		"tslint": "~5.14.0",
-		"tslint-config-airbnb": "~5.11.1",
+		"tslint-config-prettier": "~1.18.0",
 		"tslint-react": "~3.6.0",
 		"typescript": "~3.3.3333"
 	},
