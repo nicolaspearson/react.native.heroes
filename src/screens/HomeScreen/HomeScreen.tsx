@@ -42,6 +42,13 @@ const styles = StyleSheet.create({
 		marginRight: 10
 	},
 
+	addButton: {
+		color: '#FFF',
+		fontSize: 24,
+		paddingLeft: 20,
+		paddingRight: 20
+	},
+
 	scrollContainer: {
 		display: 'flex',
 		flex: 1,
@@ -61,8 +68,19 @@ interface State {
 @inject('heroStore')
 @observer
 class HomeScreen extends React.Component<HomeScreenProps, State> {
-	public static navigationOptions = {
-		title: 'Home'
+	public static navigationOptions = ({
+		navigation
+	}: {
+		navigation: NavigationScreenProp<NavigationState>;
+	}) => {
+		return {
+			headerTitle: 'Home',
+			headerRight: (
+				<Text style={styles.addButton} onPress={() => navigation.navigate('Hero', {})}>
+					+
+				</Text>
+			)
+		};
 	};
 
 	public state: State = {
@@ -76,7 +94,6 @@ class HomeScreen extends React.Component<HomeScreenProps, State> {
 	private loadData = async () => {
 		if (this.props.heroStore) {
 			await this.props.heroStore.getHeroes();
-			this.setState({ heroes: this.props.heroStore.dataList });
 		}
 	};
 
@@ -116,6 +133,9 @@ class HomeScreen extends React.Component<HomeScreenProps, State> {
 	public render() {
 		const hasHeroes: boolean = this.state.heroes.length > 0;
 		const loading: boolean = this.props.heroStore && this.props.heroStore.loading ? true : false;
+		if (!loading && this.props.heroStore) {
+			this.setState({ heroes: this.props.heroStore.dataList });
+		}
 		if (hasHeroes) {
 			return this.renderHeroList();
 		} else if (!loading) {
