@@ -18,17 +18,19 @@
 		"jest": "jest"
 	},
 	"dependencies": {
-		"@ant-design/react-native": "^3.1.4",
+		"@ant-design/react-native": "~3.1.4",
 		"expo": "~32.0.6",
+		"mobx": "~5.9.0",
+		"mobx-react": "~5.4.3",
 		"react": "16.5.0",
 		"react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
 		"react-navigation": "~3.4.1"
 	},
 	"devDependencies": {
+		"@babel/plugin-proposal-decorators": "~7.3.0",
 		"@types/expo": "~32.0.8",
 		"@types/jest": "~24.0.11",
 		"@types/react": "~16.8.8",
-		"@types/react-dom": "~16.8.2",
 		"@types/react-native": "~0.57.40",
 		"@types/react-test-renderer": "~16.8.1",
 		"jest": "~24.5.0",

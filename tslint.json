@@ -10,7 +10,7 @@
 		"indent": [true, "tabs"],
 		"ter-indent": [true, "tab"],
 		"interface-name": [true, "never-prefix"],
-		"no-console": [true],
+		"no-console": [false],
 		"one-line": [true, "check-open-brace", "check-whitespace"],
 		"no-var-keyword": true,
 		"semicolon": [true, "always", "ignore-bound-class-methods"],

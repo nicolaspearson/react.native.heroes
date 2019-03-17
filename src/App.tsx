@@ -1,10 +1,12 @@
-import { Provider } from '@ant-design/react-native';
 import { Theme } from '@ant-design/react-native/lib/style';
 import { AppLoading, Font } from 'expo';
+import { configure } from 'mobx';
+import { observer, Provider } from 'mobx-react';
 import * as React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import Home from './screens/Home';
+import stores from './store';
 
 const AppNavigator = createStackNavigator(
 	{
@@ -27,6 +29,10 @@ interface State {
 	theme?: Partial<Theme>;
 }
 
+// MobX: Enforce strict mode
+configure({ enforceActions: 'observed' });
+
+@observer
 class App extends React.Component<AppProps, State> {
 	public state: State = {
 		currentTheme: undefined,
@@ -60,7 +66,7 @@ class App extends React.Component<AppProps, State> {
 		}
 
 		return (
-			<Provider theme={theme}>
+			<Provider {...stores} theme={theme}>
 				<AppContainer screenProps={{ changeTheme: this.changeTheme, currentTheme }} />
 			</Provider>
 		);

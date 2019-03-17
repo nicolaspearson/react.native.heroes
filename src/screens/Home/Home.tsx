@@ -1,6 +1,9 @@
 import { Button } from '@ant-design/react-native';
+import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
+import { HeroStore } from '../../store/HeroStore';
 
 const styles = StyleSheet.create({
 	container: {
@@ -16,13 +19,15 @@ const styles = StyleSheet.create({
 });
 
 export interface HomeProps {
-	// Empty
+	heroStore?: HeroStore;
 }
 
 interface State {
 	// Empty
 }
 
+@inject('heroStore')
+@observer
 class Home extends React.Component<HomeProps, State> {
 	public render() {
 		return (
