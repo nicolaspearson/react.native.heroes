@@ -20,7 +20,7 @@ export class HeroApi {
 	};
 
 	public update = (id: number, hero: Hero): Promise<Response> => {
-		return ApiUtils.execute(this.headers, 'PUT', ApiUtils.getApiEndpoint(), `/hero/${id}`);
+		return ApiUtils.execute(this.headers, 'PUT', ApiUtils.getApiEndpoint(), `/hero/${id}`, hero);
 	};
 
 	public delete = (id: number): Promise<Response> => {
