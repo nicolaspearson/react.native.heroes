@@ -2,6 +2,7 @@ import { Button, List } from '@ant-design/react-native';
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { NavigationScreenProp, NavigationState } from 'react-navigation';
 
 import { Hero } from '../../models/Hero';
 import { HeroStore } from '../../store/HeroStore';
@@ -48,8 +49,9 @@ const styles = StyleSheet.create({
 	}
 });
 
-export interface HomeProps {
+export interface HomeScreenProps {
 	heroStore?: HeroStore;
+	navigation: NavigationScreenProp<NavigationState>;
 }
 
 interface State {
@@ -58,7 +60,7 @@ interface State {
 
 @inject('heroStore')
 @observer
-class Home extends React.Component<HomeProps, State> {
+class HomeScreen extends React.Component<HomeScreenProps, State> {
 	public static navigationOptions = {
 		title: 'Home'
 	};
@@ -82,11 +84,15 @@ class Home extends React.Component<HomeProps, State> {
 		await this.loadData();
 	};
 
+	private handleHeroPress = (hero: Hero) => {
+		this.props.navigation.navigate('Hero', { hero });
+	};
+
 	private renderHeroItems = (): JSX.Element[] => {
 		const items: JSX.Element[] = [];
 		for (const hero of this.state.heroes) {
 			items.push(
-				<Item key={hero.id} arrow="horizontal">
+				<Item key={hero.id} arrow="horizontal" onPress={() => this.handleHeroPress(hero)}>
 					{hero.name}
 				</Item>
 			);
@@ -109,27 +115,30 @@ class Home extends React.Component<HomeProps, State> {
 
 	public render() {
 		const hasHeroes: boolean = this.state.heroes.length > 0;
+		const loading: boolean = this.props.heroStore && this.props.heroStore.loading ? true : false;
 		if (hasHeroes) {
 			return this.renderHeroList();
+		} else if (!loading) {
+			return (
+				<View style={styles.container}>
+					<View style={styles.emptyTextContainer}>
+						<Text style={styles.emptyText}>
+							No heroes found, you can try to reload the data, or create a new hero!
+						</Text>
+					</View>
+					<View style={styles.buttonContainer}>
+						<Button style={styles.button} onPress={this.handleReloadPress}>
+							Reload
+						</Button>
+						<Button style={styles.button} type="primary">
+							Create
+						</Button>
+					</View>
+				</View>
+			);
 		}
-		return (
-			<View style={styles.container}>
-				<View style={styles.emptyTextContainer}>
-					<Text style={styles.emptyText}>
-						No heroes found, you can try to reload the data, or create a new hero!
-					</Text>
-				</View>
-				<View style={styles.buttonContainer}>
-					<Button style={styles.button} onPress={this.handleReloadPress}>
-						Reload
-					</Button>
-					<Button style={styles.button} type="primary">
-						Create
-					</Button>
-				</View>
-			</View>
-		);
+		return <View style={styles.container} />;
 	}
 }
 
-export default Home;
+export default HomeScreen;

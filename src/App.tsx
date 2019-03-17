@@ -5,12 +5,14 @@ import { observer, Provider } from 'mobx-react';
 import * as React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
-import Home from './screens/Home';
+import HeroScreen from './screens/HeroScreen';
+import HomeScreen from './screens/HomeScreen';
 import stores from './store';
 
 const AppNavigator = createStackNavigator(
 	{
-		Home: { screen: Home }
+		Home: { screen: HomeScreen },
+		Hero: { screen: HeroScreen }
 	},
 	{
 		initialRouteName: 'Home',
