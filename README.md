@@ -24,4 +24,8 @@ Run the project:
 yarn start
 ```
 
-Open the application using the Expo app and scanning the generated QR Code.
+Open the application using the Expo app and scan the generated QR Code.
+
+## Contribution Guidelines
+
+Never commit directly to master, create a feature branch and submit a pull request.
